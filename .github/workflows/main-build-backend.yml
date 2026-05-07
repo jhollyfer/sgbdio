@@ -1,0 +1,48 @@
+name: Build Backend (Main)
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: Build
+        working-directory: ./backend
+        run: npm run build
+
+      - name: Prune dev dependencies
+        working-directory: ./backend
+        run: npm prune --production
+
+      - name: Copy scalar standalone
+        working-directory: ./backend
+        run: |
+          mkdir -p build/dist/js
+          cp node_modules/@scalar/fastify-api-reference/dist/js/standalone.js build/dist/js/
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: backend-build
+          path: |
+            backend/build/
+            backend/node_modules/
+            backend/package.json
+            backend/_storage/
+            backend/templates/
+          retention-days: 1

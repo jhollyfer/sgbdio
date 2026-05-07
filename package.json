@@ -1,0 +1,20 @@
+{
+  "name": "sgbdio",
+  "private": true,
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "npm-run-all2": "^8.0.4"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint": "run-p lint:*",
+    "test:unit:backend": "cd backend && npm run test:unit",
+    "test:e2e:backend": "cd backend && npm run test:e2e",
+    "test:frontend": "cd frontend && npm test",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "run-p build:*"
+  }
+}

@@ -1,0 +1,105 @@
+name: Main - Test Backend
+
+on:
+  workflow_call:
+
+jobs:
+  test-unit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Run unit tests
+        working-directory: backend
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/sgbdio_test
+          APPLICATION_SERVER_URL: http://localhost:3000
+          APPLICATION_CLIENT_URL: http://localhost:5173
+          EMAIL_PROVIDER_HOST: sandbox.smtp.mailtrap.io
+          EMAIL_PROVIDER_PORT: 2525
+          EMAIL_PROVIDER_USER: 6bd45eccf582a5
+          EMAIL_PROVIDER_PASSWORD: 6df8346e3a3422
+          EMAIL_PROVIDER_FROM: no-reply@example.com
+          STORAGE_DRIVER: local
+          COOKIE_DOMAIN: localhost
+          COOKIE_SECRET: test-cookie-secret-for-ci-pipeline
+          JWT_PRIVATE_KEY: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQzA2TlIzWWhaM0o2bUsKMThOTGJHRnRrTC9QNktUbDdaT2JVSnBYbUIzSHAvUjdLRjZ0enpEc2h1cGpHWmlSVHQ2NnBCYXhPUWFLcTRxZwpSNlZsRGZWSjBlTzJuWGFHZHhGckwxeW45K2drUmY3ZEVwRWVlbFVkR2h0TW4zSkJMZldoUEduOUpmb2JxVlhWCkdwRVZ2RkhiTm9LU2tteW9UNHlUSkNzdnc5c2tVVWNIdEUrc0o4ekhJeDNEbTV5V1gzYkM0Nk91QXJaVVhRcnEKTWo5S3hUNHhBYS82SkRadnpTakxrOHpXNnZsTmNtUC81TExTcG56UjhHWHZLblJRK3p3bkhSOWZXdTFtR1BwdgpPZWo3djdydEJ6dDdZcTVUcUNSaXNyVHRMMm5od0RhUXlnTW1Ra1VPMCt2RGtZYUpZbDBSYjBlUjJ5TTgwT0xzCnRnVDhaV2ovQWdNQkFBRUNnZ0VBUlVlU3NnTkl1aW5ndGhDSnRCVVZ2SGs5MDNkeXlyQ3dJYjc4MUVXblJlSHUKY01tVmRIZFBjNHo1THFsTE1YNWtNbEtMZENQeit0L1ZqeXJRem9ISmFSTXRZcTRyaVRRSTRpUzVsWU9ORFhNVwp0bitaUG5RM3F4VG4xbkNMTnlYTUZvcUZ4bEdvVmJhRDdiK21SdzRleE5XN3JEalJ6cVRrSHljdk9MUUc5SUZjCjNRWDZWVEYydklQSkZ3Q0V1UzRLeVMrdlhpaEpoUXgyaTdJL0dxZ3dZVUM2MExRU0U1VGlDK2F4RDlZL0ppUTkKWlloRXF5TGVNK3g2Mkt1aVR3ZDNVdElaeHUvOTQrU0NUY0VISkhlN01iN3l1ZlVvOWlJVnRYWFlVMmg2dkY4TApjeWRHcjlQU2RscHBUbVNSelNBRGE3eFp3RWcwVWMwSEcyblp2eFdHOVFLQmdRRFpxR2szVGdRR2h1eFRlQTFYCld2VzdRVVZTWUZjQ2pHSkJpU1NTMTAyS2V5aDAxZlZ4dFU1TlRVSHBmcmE0NE81d3lLb0srdXhuSWdleDhaMFcKSHlYUXU5aXAxQnJZc1hVeHdwL1ZjQU5BSVJ4bkJDdjZxOXpYNGtKWlp1WDVCQkVrelQ5VDl0SlBYZjZJd0cvcwpYdzhpVmdtSm55UVlvQWpPdXJlQlJkWWFMUUtCZ1FEVXh6TVI3ZjJMY21EaiswRGZ2T1doTjlDbVo4cTVkRVJBCnRHcTA3dnFqQU1OUXJnWkduZFZWWTJUYkVtYWUxK1k5TGdySi84UjVxL3d5czMwV3J6SllXTVp6SXVUc1hCNUMKMGJUMXlCbzVIMmVXejdqZUd4T1lNU1dlR3BtYzlvaXBpOUlibmgvN1lYVHI4bk0zbjhjRmwyaUZqTHZSdUh5bQpNbHloV3dwbld3S0JnUUNlMjJPdmtha3VlbHNSc0pWTUpIOGs1RWFNRVBSd1Q3V0d6Mmw2SXRuZE1IWWVqK3BMCnkyQVMyMGczK3R1eG83bGpaNUZ6NGgrWVJpWUhvYWhjOU83TW9jMUlaaDRSK2JMblZuMEJjbmRzM3IyMEVqOW0KL1BoNk9CRGszMDBKcWdZNUxmUUNmQ3FTOHE5TGIraEFSRUR2ZG93UGZhOENxZ3JEbDFOSGJva05JUUtCZ0dPTApIYlZScGNCTExsRDZCb3Vsajdnd3FJaHhIa0pNeG5HTzlpelhjS0k1aFNhRmc2SWR6T1E1cjhGZGhtemhqSEVxCnpSbGJjc3VKVGw5WjRUZHZseG9GempHbkxYbjJUcUhzQWNES2NKb3d1d0d2QkVuRVdSSm1TN2Ivc3NYZ0FHZHgKWmtaTlg2RDNJd0FQV1IrNHZCODlpa1NRWm4zaTFVM2JXY0tUR1BicEFvR0JBSUVXUTZKU0drZ2Y2OERSUEJubApRNnJFbkttOTMxU0sxcER0MW1IVGlXZFJDaTZXQjcvNHpFL0tpek5WQ1lkTkNBNFYvbkFpd1dNTlF3eTN5dUc3CjBDNktFTzMyQ1ViRDJhSFBweWtLQzllZU0rVFhzTWl6WmZnKzVGT2RaYTdQWHZGcVp5Mk5MVGVyeFUrZDZmYlUKQ3JHUGtpY0picUFsSVhCekxleWNEVXRzCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+          JWT_PUBLIC_KEY: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF0T2pVZDJJV2R5ZXBpdGZEUzJ4aApiWkMveitpazVlMlRtMUNhVjVnZHg2ZjBleWhlcmM4dzdJYnFZeG1Za1U3ZXVxUVdzVGtHaXF1S29FZWxaUTMxClNkSGp0cDEyaG5jUmF5OWNwL2ZvSkVYKzNSS1JIbnBWSFJvYlRKOXlRUzMxb1R4cC9TWDZHNmxWMVJxUkZieFIKMnphQ2twSnNxRStNa3lRckw4UGJKRkZIQjdSUHJDZk14eU1kdzV1Y2xsOTJ3dU9qcmdLMlZGMEs2akkvU3NVKwpNUUd2K2lRMmI4MG95NVBNMXVyNVRYSmovK1N5MHFaODBmQmw3eXAwVVBzOEp4MGZYMXJ0WmhqNmJ6bm8rNys2CjdRYzdlMkt1VTZna1lySzA3UzlwNGNBMmtNb0RKa0pGRHRQcnc1R0dpV0pkRVc5SGtkc2pQTkRpN0xZRS9HVm8KL3dJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==
+        run: npm run test:unit -- --run
+
+  test-e2e:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: sgbdio_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d sgbdio_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Run E2E tests
+        working-directory: backend
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/sgbdio_test
+          REDIS_URL: redis://localhost:6379
+          APPLICATION_SERVER_URL: http://localhost:3000
+          APPLICATION_CLIENT_URL: http://localhost:5173
+          EMAIL_PROVIDER_HOST: sandbox.smtp.mailtrap.io
+          EMAIL_PROVIDER_PORT: 2525
+          EMAIL_PROVIDER_USER: 6bd45eccf582a5
+          EMAIL_PROVIDER_PASSWORD: 6df8346e3a3422
+          EMAIL_PROVIDER_FROM: no-reply@example.com
+          STORAGE_DRIVER: local
+          COOKIE_DOMAIN: localhost
+          COOKIE_SECRET: test-cookie-secret-for-ci-pipeline
+          JWT_PRIVATE_KEY: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRQzA2TlIzWWhaM0o2bUsKMThOTGJHRnRrTC9QNktUbDdaT2JVSnBYbUIzSHAvUjdLRjZ0enpEc2h1cGpHWmlSVHQ2NnBCYXhPUWFLcTRxZwpSNlZsRGZWSjBlTzJuWGFHZHhGckwxeW45K2drUmY3ZEVwRWVlbFVkR2h0TW4zSkJMZldoUEduOUpmb2JxVlhWCkdwRVZ2RkhiTm9LU2tteW9UNHlUSkNzdnc5c2tVVWNIdEUrc0o4ekhJeDNEbTV5V1gzYkM0Nk91QXJaVVhRcnEKTWo5S3hUNHhBYS82SkRadnpTakxrOHpXNnZsTmNtUC81TExTcG56UjhHWHZLblJRK3p3bkhSOWZXdTFtR1BwdgpPZWo3djdydEJ6dDdZcTVUcUNSaXNyVHRMMm5od0RhUXlnTW1Ra1VPMCt2RGtZYUpZbDBSYjBlUjJ5TTgwT0xzCnRnVDhaV2ovQWdNQkFBRUNnZ0VBUlVlU3NnTkl1aW5ndGhDSnRCVVZ2SGs5MDNkeXlyQ3dJYjc4MUVXblJlSHUKY01tVmRIZFBjNHo1THFsTE1YNWtNbEtMZENQeit0L1ZqeXJRem9ISmFSTXRZcTRyaVRRSTRpUzVsWU9ORFhNVwp0bitaUG5RM3F4VG4xbkNMTnlYTUZvcUZ4bEdvVmJhRDdiK21SdzRleE5XN3JEalJ6cVRrSHljdk9MUUc5SUZjCjNRWDZWVEYydklQSkZ3Q0V1UzRLeVMrdlhpaEpoUXgyaTdJL0dxZ3dZVUM2MExRU0U1VGlDK2F4RDlZL0ppUTkKWlloRXF5TGVNK3g2Mkt1aVR3ZDNVdElaeHUvOTQrU0NUY0VISkhlN01iN3l1ZlVvOWlJVnRYWFlVMmg2dkY4TApjeWRHcjlQU2RscHBUbVNSelNBRGE3eFp3RWcwVWMwSEcyblp2eFdHOVFLQmdRRFpxR2szVGdRR2h1eFRlQTFYCld2VzdRVVZTWUZjQ2pHSkJpU1NTMTAyS2V5aDAxZlZ4dFU1TlRVSHBmcmE0NE81d3lLb0srdXhuSWdleDhaMFcKSHlYUXU5aXAxQnJZc1hVeHdwL1ZjQU5BSVJ4bkJDdjZxOXpYNGtKWlp1WDVCQkVrelQ5VDl0SlBYZjZJd0cvcwpYdzhpVmdtSm55UVlvQWpPdXJlQlJkWWFMUUtCZ1FEVXh6TVI3ZjJMY21EaiswRGZ2T1doTjlDbVo4cTVkRVJBCnRHcTA3dnFqQU1OUXJnWkduZFZWWTJUYkVtYWUxK1k5TGdySi84UjVxL3d5czMwV3J6SllXTVp6SXVUc1hCNUMKMGJUMXlCbzVIMmVXejdqZUd4T1lNU1dlR3BtYzlvaXBpOUlibmgvN1lYVHI4bk0zbjhjRmwyaUZqTHZSdUh5bQpNbHloV3dwbld3S0JnUUNlMjJPdmtha3VlbHNSc0pWTUpIOGs1RWFNRVBSd1Q3V0d6Mmw2SXRuZE1IWWVqK3BMCnkyQVMyMGczK3R1eG83bGpaNUZ6NGgrWVJpWUhvYWhjOU83TW9jMUlaaDRSK2JMblZuMEJjbmRzM3IyMEVqOW0KL1BoNk9CRGszMDBKcWdZNUxmUUNmQ3FTOHE5TGIraEFSRUR2ZG93UGZhOENxZ3JEbDFOSGJva05JUUtCZ0dPTApIYlZScGNCTExsRDZCb3Vsajdnd3FJaHhIa0pNeG5HTzlpelhjS0k1aFNhRmc2SWR6T1E1cjhGZGhtemhqSEVxCnpSbGJjc3VKVGw5WjRUZHZseG9GempHbkxYbjJUcUhzQWNES2NKb3d1d0d2QkVuRVdSSm1TN2Ivc3NYZ0FHZHgKWmtaTlg2RDNJd0FQV1IrNHZCODlpa1NRWm4zaTFVM2JXY0tUR1BicEFvR0JBSUVXUTZKU0drZ2Y2OERSUEJubApRNnJFbkttOTMxU0sxcER0MW1IVGlXZFJDaTZXQjcvNHpFL0tpek5WQ1lkTkNBNFYvbkFpd1dNTlF3eTN5dUc3CjBDNktFTzMyQ1ViRDJhSFBweWtLQzllZU0rVFhzTWl6WmZnKzVGT2RaYTdQWHZGcVp5Mk5MVGVyeFUrZDZmYlUKQ3JHUGtpY0picUFsSVhCekxleWNEVXRzCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+          JWT_PUBLIC_KEY: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF0T2pVZDJJV2R5ZXBpdGZEUzJ4aApiWkMveitpazVlMlRtMUNhVjVnZHg2ZjBleWhlcmM4dzdJYnFZeG1Za1U3ZXVxUVdzVGtHaXF1S29FZWxaUTMxClNkSGp0cDEyaG5jUmF5OWNwL2ZvSkVYKzNSS1JIbnBWSFJvYlRKOXlRUzMxb1R4cC9TWDZHNmxWMVJxUkZieFIKMnphQ2twSnNxRStNa3lRckw4UGJKRkZIQjdSUHJDZk14eU1kdzV1Y2xsOTJ3dU9qcmdLMlZGMEs2akkvU3NVKwpNUUd2K2lRMmI4MG95NVBNMXVyNVRYSmovK1N5MHFaODBmQmw3eXAwVVBzOEp4MGZYMXJ0WmhqNmJ6bm8rNys2CjdRYzdlMkt1VTZna1lySzA3UzlwNGNBMmtNb0RKa0pGRHRQcnc1R0dpV0pkRVc5SGtkc2pQTkRpN0xZRS9HVm8KL3dJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==
+        run: npm run test:e2e -- --run

@@ -1,0 +1,38 @@
+name: Build Frontend (Main)
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build
+        working-directory: ./frontend
+        run: npm run build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8196"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: frontend-build
+          path: |
+            frontend/.output/
+            frontend/docker-entrypoint.sh
+          include-hidden-files: true
+          retention-days: 1

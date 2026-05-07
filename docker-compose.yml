@@ -1,0 +1,102 @@
+name: sgbdio
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sgbdio-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      POSTGRES_DB: ${DATABASE_NAME:-sgbdio}
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sgbdio-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME:-postgres} -d ${DATABASE_NAME:-sgbdio}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  redis:
+    image: redis:7-alpine
+    container_name: sgbdio-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-volume:/data
+    networks:
+      - sgbdio-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-local
+    container_name: sgbdio-api
+    restart: unless-stopped
+    ports:
+      - "${APPLICATION_SERVER_PORT:-3000}:3000"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://${DATABASE_USERNAME:-postgres}:${DATABASE_PASSWORD:-postgres}@postgres:5432/${DATABASE_NAME:-sgbdio}
+      REDIS_URL: redis://redis:6379
+    networks:
+      - sgbdio-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./backend/_storage:/app/_storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health-check"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-local
+    container_name: sgbdio-app
+    restart: unless-stopped
+    ports:
+      - "${APPLICATION_CLIENT_PORT:-5173}:3000"
+    env_file: .env
+    environment:
+      SERVER_URL: http://api:3000
+      VITE_APP_TITLE: ${VITE_APP_TITLE:-sgbdio}
+    networks:
+      - sgbdio-network
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+volumes:
+  postgres-volume:
+    driver: local
+  redis-volume:
+    driver: local
+
+networks:
+  sgbdio-network:
+    driver: bridge

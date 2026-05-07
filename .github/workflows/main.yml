@@ -1,0 +1,30 @@
+name: Build and Docker on Latest
+
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  test-backend:
+    uses: ./.github/workflows/main-test-backend.yml
+
+  build-backend:
+    needs: test-backend
+    uses: ./.github/workflows/main-build-backend.yml
+
+  build-frontend:
+    uses: ./.github/workflows/main-build-frontend.yml
+
+  docker-backend:
+    needs: build-backend
+    uses: ./.github/workflows/main-docker-backend.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  docker-frontend:
+    needs: build-frontend
+    uses: ./.github/workflows/main-docker-frontend.yml
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

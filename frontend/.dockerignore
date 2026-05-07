@@ -1,0 +1,7 @@
+node_modules
+.output
+.cache
+.vite
+.git
+.gitignore
+README.md

@@ -1,0 +1,32 @@
+# Dependências
+**/node_modules/
+
+# Builds
+**/dist/
+**/build/
+**/.output/
+**/.cache/
+**/.vite/
+**/.nitro/
+
+# Logs
+**/*.log
+**/logs
+
+# Cobertura
+**/coverage/
+
+# Sistema
+**/.DS_Store
+
+# Environment files
+**/.env
+**/.env.test
+
+# Storage local do backend (mantém logos default se existirem)
+backend/_storage/*
+!backend/_storage/logo-large.webp
+!backend/_storage/logo-small.webp
+
+# Geração do Paraglide (i18n)
+frontend/src/paraglide/

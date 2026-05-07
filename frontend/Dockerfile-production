@@ -1,0 +1,17 @@
+FROM node:24-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache curl
+
+# `.output/` é gerado pelo `npm run build` (TanStack Start + Nitro) e
+# vem do artifact do CI. Em build local, rode `npm run build` antes.
+COPY .output ./.output
+
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=3000
+
+EXPOSE 3000
+
+CMD ["node", ".output/server/index.mjs"]
