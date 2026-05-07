@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
+import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
-
-import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 
 import { toUserResponse } from '../users.mapper';
 

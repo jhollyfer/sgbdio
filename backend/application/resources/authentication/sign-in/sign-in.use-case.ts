@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-import type z from 'zod';
-
 import { left, right, type Either } from '@application/core/either.core';
 import {
   E_USER_STATUS,
@@ -10,6 +6,8 @@ import {
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
 import { PasswordContractService } from '@application/services/password/password-contract.service';
+import { Service } from 'fastify-decorators';
+import type z from 'zod';
 
 import type { SignInBodyValidator } from './sign-in.validator';
 

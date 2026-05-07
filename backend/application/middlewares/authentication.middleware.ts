@@ -1,7 +1,6 @@
-import { type FastifyRequest } from 'fastify';
-
 import { E_JWT_TYPE, type IJWTPayload } from '@application/core/entity.core';
 import HTTPException from '@application/core/exception.core';
+import { type FastifyRequest } from 'fastify';
 
 interface AuthOptions {
   optional?: boolean;

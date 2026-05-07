@@ -1,6 +1,5 @@
-import Redis, { type RedisOptions } from 'ioredis';
-
 import { Env } from '@start/env';
+import Redis, { type RedisOptions } from 'ioredis';
 
 const redis = new Redis(Env.REDIS_URL);
 

@@ -1,5 +1,5 @@
 import js from '@eslint/js';
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import-x';
 import prettier from 'eslint-plugin-prettier';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -17,7 +17,7 @@ export default [
     },
     plugins: {
       '@typescript-eslint': tseslint.plugin,
-      import: importPlugin,
+      'import-x': importPlugin,
       prettier,
     },
     rules: {
@@ -30,7 +30,7 @@ export default [
           allowTypedFunctionExpressions: true,
         },
       ],
-      'import/order': [
+      'import-x/order': [
         'error',
         {
           alphabetize: {
@@ -47,6 +47,23 @@ export default [
       '@typescript-eslint/consistent-type-imports': 'off',
       // Permite uso de ?. e ?? mesmo quando TypeScript acha desnecessário
       '@typescript-eslint/no-unnecessary-condition': 'off',
+      // Base no-unused-vars dá falso-positivo em parâmetros de constructor
+      // (private readonly). Delega para versão typescript-aware.
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      // Project usa pattern const + type homônimos (ex.: Role) que conflita
+      // com no-redeclare. TS permite porque value-space e type-space são
+      // separados; a versão typescript-aware do plugin também não trata
+      // como merge declaration. Desabilita ambas.
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redeclare': 'off',
     },
     settings: {
       'import/resolver': {

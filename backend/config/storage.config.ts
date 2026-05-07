@@ -1,7 +1,6 @@
 import { S3Client } from '@aws-sdk/client-s3';
-import { join } from 'node:path';
-
 import { Env } from '@start/env';
+import { join } from 'node:path';
 
 let cachedClient: S3Client | null = null;
 let cachedFingerprint = '';

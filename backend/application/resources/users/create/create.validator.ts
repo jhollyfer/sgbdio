@@ -1,6 +1,5 @@
-import z from 'zod';
-
 import { PASSWORD_REGEX } from '@application/core/password.constants';
+import z from 'zod';
 
 import { UserBaseValidator } from '../user-base.validator';
 

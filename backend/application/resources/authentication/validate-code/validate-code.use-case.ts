@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
-import { differenceInMinutes } from 'date-fns';
-import { Service } from 'fastify-decorators';
-import type z from 'zod';
-
 import { left, right, type Either } from '@application/core/either.core';
 import { E_TOKEN_STATUS, type IUser } from '@application/core/entity.core';
 import HTTPException from '@application/core/exception.core';
 import { ValidationTokenContractRepository } from '@application/repositories/validation-token/validation-token-contract.repository';
+import { differenceInMinutes } from 'date-fns';
+import { Service } from 'fastify-decorators';
+import type z from 'zod';
 
 import type { ValidateCodeBodyValidator } from './validate-code.validator';
 

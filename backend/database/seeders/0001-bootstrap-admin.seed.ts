@@ -1,10 +1,9 @@
-import bcrypt from 'bcryptjs';
-import { eq } from 'drizzle-orm';
-
 import { Role } from '@application/core/role.core';
 import { getDb } from '@config/database.config';
 import { users } from '@database/schema';
 import { Env } from '@start/env';
+import bcrypt from 'bcryptjs';
+import { eq } from 'drizzle-orm';
 
 /**
  * Cria/atualiza o usuário MASTER inicial usando BOOTSTRAP_MASTER_EMAIL,

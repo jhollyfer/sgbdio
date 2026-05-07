@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, getInstanceByToken, POST } from 'fastify-decorators';
-
 import { E_JWT_TYPE, type IJWTPayload } from '@application/core/entity.core';
 import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import { setCookieTokens } from '@application/utils/cookies.util';
 import { createTokens } from '@application/utils/jwt.util';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, getInstanceByToken, POST } from 'fastify-decorators';
 
 import { RefreshTokenSchema } from './refresh-token.schema';
 import RefreshTokenUseCase from './refresh-token.use-case';
@@ -77,7 +75,7 @@ export default class {
       setCookieTokens(response, { ...tokens });
 
       return response.status(200).send();
-    } catch (error) {
+    } catch (_error) {
       return response.status(401).send({
         message: 'Invalid or expired refresh token',
         code: 401,

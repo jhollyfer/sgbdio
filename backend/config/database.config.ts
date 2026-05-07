@@ -1,10 +1,9 @@
+import * as schema from '@database/schema';
+import { Env } from '@start/env';
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { join } from 'node:path';
 import pg from 'pg';
-
-import * as schema from '@database/schema';
-import { Env } from '@start/env';
 
 let pool: pg.Pool | null = null;
 let dbInstance: NodePgDatabase<typeof schema> | null = null;

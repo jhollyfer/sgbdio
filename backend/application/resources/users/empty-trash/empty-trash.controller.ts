@@ -1,9 +1,8 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, DELETE, getInstanceByToken } from 'fastify-decorators';
-
 import { Role } from '@application/core/role.core';
 import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import { RoleMiddleware } from '@application/middlewares/role.middleware';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, DELETE, getInstanceByToken } from 'fastify-decorators';
 
 import { UserEmptyTrashSchema } from './empty-trash.schema';
 import UserEmptyTrashUseCase from './empty-trash.use-case';
@@ -13,7 +12,6 @@ import UserEmptyTrashUseCase from './empty-trash.use-case';
 })
 export default class {
   constructor(
-    // eslint-disable-next-line no-unused-vars
     private readonly useCase: UserEmptyTrashUseCase = getInstanceByToken(
       UserEmptyTrashUseCase,
     ),

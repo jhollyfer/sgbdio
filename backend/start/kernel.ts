@@ -1,19 +1,4 @@
-/* eslint-disable no-unused-vars */
 import 'reflect-metadata';
-
-import { GetObjectCommand } from '@aws-sdk/client-s3';
-import cookie from '@fastify/cookie';
-import cors from '@fastify/cors';
-import jwt from '@fastify/jwt';
-import multipart from '@fastify/multipart';
-import swagger from '@fastify/swagger';
-import scalar from '@scalar/fastify-api-reference';
-import ajv from 'ajv-errors';
-import fastify from 'fastify';
-import { bootstrap, getInstanceByToken } from 'fastify-decorators';
-import { createReadStream, existsSync, statSync } from 'node:fs';
-import { join } from 'node:path';
-import z, { ZodError } from 'zod';
 
 import { loadControllers } from '@application/core/controllers';
 import { registerDependencies } from '@application/core/di-registry';
@@ -29,8 +14,21 @@ import {
   setCachedStorageMeta,
   type StorageMeta,
 } from '@application/services/storage/storage-meta-cache';
+import { GetObjectCommand } from '@aws-sdk/client-s3';
 import { getLocalStoragePath, getS3Client } from '@config/storage.config';
+import cookie from '@fastify/cookie';
+import cors from '@fastify/cors';
+import jwt from '@fastify/jwt';
+import multipart from '@fastify/multipart';
+import swagger from '@fastify/swagger';
+import scalar from '@scalar/fastify-api-reference';
 import { Env } from '@start/env';
+import ajv from 'ajv-errors';
+import fastify from 'fastify';
+import { bootstrap, getInstanceByToken } from 'fastify-decorators';
+import { createReadStream, existsSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import z, { ZodError } from 'zod';
 
 function matchOrigin(origin: string, pattern: string): boolean {
   if (pattern.startsWith('*.')) {

@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
+import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { Controller, getInstanceByToken, PUT } from 'fastify-decorators';
-
-import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 
 import { ResetPasswordSchema } from './reset-password.schema';
 import UpdatePasswordRecoveryUseCase from './reset-password.use-case';

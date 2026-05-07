@@ -1,3 +1,7 @@
+import type { FindOptions, IUser } from '@application/core/entity.core';
+import { Role } from '@application/core/role.core';
+import { getDb } from '@config/database.config';
+import { users, type UserRow } from '@database/schema';
 import {
   and,
   asc,
@@ -12,11 +16,6 @@ import {
 } from 'drizzle-orm';
 import type { PgColumn } from 'drizzle-orm/pg-core';
 import { Service } from 'fastify-decorators';
-
-import type { FindOptions, IUser } from '@application/core/entity.core';
-import { Role } from '@application/core/role.core';
-import { getDb } from '@config/database.config';
-import { users, type UserRow } from '@database/schema';
 
 import {
   UserContractRepository,

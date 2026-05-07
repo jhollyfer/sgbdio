@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import type { IUser, Paginated } from '@application/core/entity.core';
 
 export type UserResponse = Omit<IUser, 'password'>;

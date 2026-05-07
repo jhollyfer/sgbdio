@@ -1,9 +1,8 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
-
 import { setCookieTokens } from '@application/utils/cookies.util';
 import { createTokens } from '@application/utils/jwt.util';
 import { Env } from '@start/env';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
 
 import { MagicLinkSchema } from './magic-link.schema';
 import MagicLinkUseCase from './magic-link.use-case';
@@ -14,7 +13,6 @@ import { MagicLinkQueryValidator } from './magic-link.validator';
 })
 export default class {
   constructor(
-    // eslint-disable-next-line no-unused-vars
     private readonly useCase: MagicLinkUseCase = getInstanceByToken(
       MagicLinkUseCase,
     ),
@@ -48,6 +46,8 @@ export default class {
 
     return response
       .status(302)
-      .redirect(Env.APPLICATION_CLIENT_URL.concat('/dashboard?authentication=success'));
+      .redirect(
+        Env.APPLICATION_CLIENT_URL.concat('/dashboard?authentication=success'),
+      );
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import type {
   E_TOKEN_STATUS,
   FindOptions,

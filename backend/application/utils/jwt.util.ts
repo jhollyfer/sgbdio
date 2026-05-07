@@ -1,6 +1,9 @@
+import {
+  E_JWT_TYPE,
+  type IJWTPayload,
+  type IUser,
+} from '@application/core/entity.core';
 import type { FastifyReply } from 'fastify';
-
-import { E_JWT_TYPE, type IJWTPayload, type IUser } from '@application/core/entity.core';
 
 export interface TokenPair {
   accessToken: string;

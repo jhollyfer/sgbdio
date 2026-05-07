@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-
 import type { Either } from '@application/core/either.core';
 import { left, right } from '@application/core/either.core';
 import type { IUser as Entity } from '@application/core/entity.core';
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
 import { PasswordContractService } from '@application/services/password/password-contract.service';
+import { Service } from 'fastify-decorators';
 
 import type { ProfileUpdatePayload } from './update.validator';
 

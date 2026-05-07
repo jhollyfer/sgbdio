@@ -1,6 +1,3 @@
-import { and, count as countFn, desc, eq, type SQL } from 'drizzle-orm';
-import { Service } from 'fastify-decorators';
-
 import type {
   FindOptions,
   IUser,
@@ -13,6 +10,8 @@ import {
   type UserRow,
   type ValidationTokenRow,
 } from '@database/schema';
+import { and, count as countFn, desc, eq, type SQL } from 'drizzle-orm';
+import { Service } from 'fastify-decorators';
 
 import {
   ValidationTokenContractRepository,

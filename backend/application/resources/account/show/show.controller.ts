@@ -1,8 +1,7 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
-
 import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import { toUserResponse } from '@application/resources/users/users.mapper';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
 
 import { ProfileShowSchema } from './show.schema';
 import ProfileShowUseCase from './show.use-case';

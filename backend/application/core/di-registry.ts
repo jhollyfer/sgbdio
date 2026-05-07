@@ -1,11 +1,9 @@
-import { injectablesHolder } from 'fastify-decorators';
-
-import StorageDrizzleRepository from '@application/repositories/storage/storage-drizzle.repository';
 import { StorageContractRepository } from '@application/repositories/storage/storage-contract.repository';
-import UserDrizzleRepository from '@application/repositories/user/user-drizzle.repository';
+import StorageDrizzleRepository from '@application/repositories/storage/storage-drizzle.repository';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
-import ValidationTokenDrizzleRepository from '@application/repositories/validation-token/validation-token-drizzle.repository';
+import UserDrizzleRepository from '@application/repositories/user/user-drizzle.repository';
 import { ValidationTokenContractRepository } from '@application/repositories/validation-token/validation-token-contract.repository';
+import ValidationTokenDrizzleRepository from '@application/repositories/validation-token/validation-token-drizzle.repository';
 import { EmailContractService } from '@application/services/email/email-contract.service';
 import NodemailerEmailService from '@application/services/email/nodemailer-email.service';
 import BullMQEmailQueueService from '@application/services/email-queue/bullmq-email-queue.service';
@@ -14,6 +12,7 @@ import BcryptPasswordService from '@application/services/password/bcrypt-passwor
 import { PasswordContractService } from '@application/services/password/password-contract.service';
 import { StorageContractService } from '@application/services/storage/storage-contract.service';
 import StorageService from '@application/services/storage/storage.service';
+import { injectablesHolder } from 'fastify-decorators';
 
 /**
  * Registro explícito de dependências.
@@ -25,7 +24,10 @@ export function registerDependencies(): void {
     StorageDrizzleRepository,
   );
 
-  injectablesHolder.injectService(UserContractRepository, UserDrizzleRepository);
+  injectablesHolder.injectService(
+    UserContractRepository,
+    UserDrizzleRepository,
+  );
 
   injectablesHolder.injectService(
     ValidationTokenContractRepository,

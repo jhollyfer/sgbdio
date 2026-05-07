@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-import { type FastifyRequest } from 'fastify';
-
 import HTTPException from '@application/core/exception.core';
 import { type Role } from '@application/core/role.core';
+import { type FastifyRequest } from 'fastify';
 
 type Middleware = (request: FastifyRequest) => Promise<void>;
 

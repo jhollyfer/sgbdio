@@ -1,9 +1,8 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, getInstanceByToken, PATCH } from 'fastify-decorators';
-
 import { Role } from '@application/core/role.core';
 import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import { RoleMiddleware } from '@application/middlewares/role.middleware';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, getInstanceByToken, PATCH } from 'fastify-decorators';
 
 import { UserBulkRestoreSchema } from './bulk-restore.schema';
 import UserBulkRestoreUseCase from './bulk-restore.use-case';
@@ -14,7 +13,6 @@ import { UserBulkRestoreBodyValidator } from './bulk-restore.validator';
 })
 export default class {
   constructor(
-    // eslint-disable-next-line no-unused-vars
     private readonly useCase: UserBulkRestoreUseCase = getInstanceByToken(
       UserBulkRestoreUseCase,
     ),

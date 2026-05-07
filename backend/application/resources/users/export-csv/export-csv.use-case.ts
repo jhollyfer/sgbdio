@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-import type { Readable } from 'node:stream';
-
 import {
   buildCsvStream,
   EXPORT_CSV_LIMIT,
@@ -14,6 +10,8 @@ import { left, right } from '@application/core/either.core';
 import type { IUser } from '@application/core/entity.core';
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
+import { Service } from 'fastify-decorators';
+import type { Readable } from 'node:stream';
 
 import type { UserExportCsvPayload } from './export-csv.validator';
 

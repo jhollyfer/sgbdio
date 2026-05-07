@@ -21,11 +21,10 @@ export type CsvField = { label: string; value: string };
  * falhar cedo com 422.
  */
 export type CsvBatchFetcher<TPayload, TEntity> = (
-  // eslint-disable-next-line no-unused-vars
   payload: TPayload,
-  // eslint-disable-next-line no-unused-vars
+
   page: number,
-  // eslint-disable-next-line no-unused-vars
+
   perPage: number,
 ) => Promise<TEntity[]>;
 

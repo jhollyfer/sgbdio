@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, getInstanceByToken, POST } from 'fastify-decorators';
-
 import {
   clearCookieTokens,
   setCookieTokens,
 } from '@application/utils/cookies.util';
 import { createTokens } from '@application/utils/jwt.util';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, getInstanceByToken, POST } from 'fastify-decorators';
 
 import { ValidateCodeSchema } from './validate-code.schema';
 import ValidateCodeUseCase from './validate-code.use-case';

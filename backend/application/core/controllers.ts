@@ -1,8 +1,7 @@
+import { Env } from '@start/env';
 import type { BootstrapConfig } from 'fastify-decorators';
 import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
-
-import { Env } from '@start/env';
 
 type Controllers = Extract<
   BootstrapConfig,

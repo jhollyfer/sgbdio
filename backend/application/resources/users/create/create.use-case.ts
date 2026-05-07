@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-
 import type { Either } from '@application/core/either.core';
 import { left, right } from '@application/core/either.core';
 import {
@@ -12,6 +9,7 @@ import { UserContractRepository } from '@application/repositories/user/user-cont
 import { EmailQueueContractService } from '@application/services/email-queue/email-queue-contract.service';
 import { PasswordContractService } from '@application/services/password/password-contract.service';
 import { Env } from '@start/env';
+import { Service } from 'fastify-decorators';
 
 import type { UserCreatePayload } from './create.validator';
 

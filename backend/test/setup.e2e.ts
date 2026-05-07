@@ -1,15 +1,14 @@
 import 'reflect-metadata';
 
-import { config } from 'dotenv';
-import { sql } from 'drizzle-orm';
-import { afterAll, beforeAll, beforeEach } from 'vitest';
-
 import {
   connectDatabase,
   disconnectDatabase,
   getDb,
   runMigrations,
 } from '@config/database.config';
+import { config } from 'dotenv';
+import { sql } from 'drizzle-orm';
+import { afterAll, beforeAll, beforeEach } from 'vitest';
 
 config({ path: '.env.test', override: true });
 

@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
+import type { IStorage, Optional } from '@application/core/entity.core';
 import type { MultipartFile } from '@fastify/multipart';
 import { Service } from 'fastify-decorators';
 import type { Readable } from 'node:stream';
-
-import type { IStorage, Optional } from '@application/core/entity.core';
 
 export type StorageUploadResponse = Optional<
   IStorage,

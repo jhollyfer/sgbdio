@@ -6,11 +6,10 @@ import {
   HeadObjectCommand,
   PutObjectCommand,
 } from '@aws-sdk/client-s3';
+import { getS3Client } from '@config/storage.config';
 import type { MultipartFile } from '@fastify/multipart';
 import { Service } from 'fastify-decorators';
 import type { Readable } from 'node:stream';
-
-import { getS3Client } from '@config/storage.config';
 
 import { processFile } from './process-file';
 import type {

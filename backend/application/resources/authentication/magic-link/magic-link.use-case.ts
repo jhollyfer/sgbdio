@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { differenceInMinutes } from 'date-fns';
-import { Service } from 'fastify-decorators';
-
 import { left, right, type Either } from '@application/core/either.core';
 import {
   E_TOKEN_STATUS,
@@ -11,6 +7,8 @@ import {
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
 import { ValidationTokenContractRepository } from '@application/repositories/validation-token/validation-token-contract.repository';
+import { differenceInMinutes } from 'date-fns';
+import { Service } from 'fastify-decorators';
 
 import type { MagicLinkPayload } from './magic-link.validator';
 

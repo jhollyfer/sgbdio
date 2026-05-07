@@ -1,9 +1,8 @@
+import { buildNodemailerConfig, resolveEmailFrom } from '@config/email.config';
 import ejs from 'ejs';
 import { Service } from 'fastify-decorators';
 import { join } from 'node:path';
 import nodemailer from 'nodemailer';
-
-import { buildNodemailerConfig, resolveEmailFrom } from '@config/email.config';
 
 import {
   EmailContractService,

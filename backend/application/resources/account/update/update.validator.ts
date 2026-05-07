@@ -1,7 +1,6 @@
-import z from 'zod';
-
 import type { Merge } from '@application/core/entity.core';
 import { PASSWORD_REGEX } from '@application/core/password.constants';
+import z from 'zod';
 
 export const ProfileUpdateBodyValidator = z.object({
   name: z

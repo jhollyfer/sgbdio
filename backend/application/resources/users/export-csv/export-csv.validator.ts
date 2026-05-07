@@ -1,11 +1,10 @@
-import z from 'zod';
-
 import {
   E_USER_STATUS,
   type IUser,
   type Merge,
 } from '@application/core/entity.core';
 import { Role } from '@application/core/role.core';
+import z from 'zod';
 
 const STATUS_VALUES = Object.values(E_USER_STATUS);
 const ROLE_VALUES = Object.values(Role);

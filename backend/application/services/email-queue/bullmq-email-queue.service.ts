@@ -1,7 +1,6 @@
+import { createBullMQConnection } from '@config/redis.config';
 import { Queue } from 'bullmq';
 import { Service } from 'fastify-decorators';
-
-import { createBullMQConnection } from '@config/redis.config';
 
 import {
   EMAIL_JOB,

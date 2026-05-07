@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
-
 import { buildCsvFilename } from '@application/core/csv/csv-filename';
 import { Role } from '@application/core/role.core';
 import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import { RoleMiddleware } from '@application/middlewares/role.middleware';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, GET, getInstanceByToken } from 'fastify-decorators';
 
 import { UserExportCsvSchema } from './export-csv.schema';
 import UserExportCsvUseCase from './export-csv.use-case';

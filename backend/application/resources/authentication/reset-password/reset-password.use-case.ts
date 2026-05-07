@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-
 import { left, right, type Either } from '@application/core/either.core';
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
 import { EmailQueueContractService } from '@application/services/email-queue/email-queue-contract.service';
 import { PasswordContractService } from '@application/services/password/password-contract.service';
+import { Service } from 'fastify-decorators';
 
 import type { ResetPasswordPayload } from './reset-password.validator';
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import type {
   E_USER_STATUS,
   FindOptions,

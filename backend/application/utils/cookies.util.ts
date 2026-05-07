@@ -1,6 +1,5 @@
-import type { FastifyReply } from 'fastify';
-
 import { Env } from '@start/env';
+import type { FastifyReply } from 'fastify';
 
 import type { TokenPair } from './jwt.util';
 

@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-
 import { left, right, type Either } from '@application/core/either.core';
 import type { IUser as Entity } from '@application/core/entity.core';
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
+import { Service } from 'fastify-decorators';
 
 import type { RefreshTokenPayload } from './refresh-token.validator';
 

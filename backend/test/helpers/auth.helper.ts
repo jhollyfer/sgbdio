@@ -1,10 +1,9 @@
-import bcrypt from 'bcryptjs';
-import supertest from 'supertest';
-
 import { Role } from '@application/core/role.core';
 import { getDb } from '@config/database.config';
 import { users } from '@database/schema';
 import { kernel } from '@start/kernel';
+import bcrypt from 'bcryptjs';
+import supertest from 'supertest';
 
 export interface AuthenticatedUser {
   user: { _id: string; email: string; name: string; role: Role };

@@ -1,11 +1,10 @@
-import { glob } from 'glob';
-import path from 'path';
-
 import {
   connectDatabase,
   disconnectDatabase,
   runMigrations,
 } from '@config/database.config';
+import { glob } from 'glob';
+import path from 'path';
 
 const FILENAME_PATTERN = /^\d{4,}-[a-z0-9-]+\.seed\.(ts|js)$/;
 

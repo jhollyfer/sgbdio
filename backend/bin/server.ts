@@ -1,11 +1,10 @@
-import { getInstanceByToken } from 'fastify-decorators';
-
 import { EmailContractService } from '@application/services/email/email-contract.service';
 import NodemailerEmailService from '@application/services/email/nodemailer-email.service';
 import { startEmailWorker } from '@application/services/email-queue/worker';
 import { connectDatabase, runMigrations } from '@config/database.config';
 import { Env } from '@start/env';
 import { kernel } from '@start/kernel';
+import { getInstanceByToken } from 'fastify-decorators';
 
 async function start(): Promise<void> {
   try {

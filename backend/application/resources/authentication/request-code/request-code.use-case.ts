@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
-import { Service } from 'fastify-decorators';
-
 import { left, right, type Either } from '@application/core/either.core';
 import { E_TOKEN_STATUS } from '@application/core/entity.core';
 import HTTPException from '@application/core/exception.core';
 import { UserContractRepository } from '@application/repositories/user/user-contract.repository';
 import { ValidationTokenContractRepository } from '@application/repositories/validation-token/validation-token-contract.repository';
 import { EmailQueueContractService } from '@application/services/email-queue/email-queue-contract.service';
+import { Service } from 'fastify-decorators';
 
 import type { RequestCodePayload } from './request-code.validator';
 

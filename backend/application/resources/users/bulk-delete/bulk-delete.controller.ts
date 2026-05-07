@@ -1,9 +1,8 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { Controller, DELETE, getInstanceByToken } from 'fastify-decorators';
-
 import { Role } from '@application/core/role.core';
 import { AuthenticationMiddleware } from '@application/middlewares/authentication.middleware';
 import { RoleMiddleware } from '@application/middlewares/role.middleware';
+import type { FastifyReply, FastifyRequest } from 'fastify';
+import { Controller, DELETE, getInstanceByToken } from 'fastify-decorators';
 
 import { UserBulkDeleteSchema } from './bulk-delete.schema';
 import UserBulkDeleteUseCase from './bulk-delete.use-case';
@@ -14,7 +13,6 @@ import { UserBulkDeleteBodyValidator } from './bulk-delete.validator';
 })
 export default class {
   constructor(
-    // eslint-disable-next-line no-unused-vars
     private readonly useCase: UserBulkDeleteUseCase = getInstanceByToken(
       UserBulkDeleteUseCase,
     ),

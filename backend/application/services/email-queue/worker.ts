@@ -8,11 +8,11 @@
  * Retry: BullMQ aplica `attempts: 3` com backoff exponencial (1s, 5s, 25s).
  * Se o resultado de sendEmail vier com `success: false`, lanca erro para forcar retry.
  */
-import { Worker, type Job } from 'bullmq';
 
 import { EmailContractService } from '@application/services/email/email-contract.service';
 import { createBullMQConnection } from '@config/redis.config';
 import { Env } from '@start/env';
+import { Worker, type Job } from 'bullmq';
 
 import {
   EMAIL_JOB,

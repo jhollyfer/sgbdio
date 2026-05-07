@@ -1,7 +1,6 @@
+import { getStorageDriver } from '@config/storage.config';
 import type { MultipartFile } from '@fastify/multipart';
 import { Service } from 'fastify-decorators';
-
-import { getStorageDriver } from '@config/storage.config';
 
 import LocalStorageService from './local-storage.service';
 import S3StorageService from './s3-storage.service';

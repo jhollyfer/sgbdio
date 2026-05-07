@@ -1,6 +1,5 @@
-import z from 'zod';
-
 import { Role } from '@application/core/role.core';
+import z from 'zod';
 
 const ROLE_VALUES = Object.values(Role);
 
