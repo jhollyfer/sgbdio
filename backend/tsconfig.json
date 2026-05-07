@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@application/*": ["./application/*"],
+      "@bin/*": ["./bin/*"],
+      "@config/*": ["./config/*"],
+      "@database/*": ["./database/*"],
+      "@start/*": ["./start/*"],
+      "@test/*": ["./test/*"]
+    },
+    "rootDirs": ["./application", "./bin", "./config", "./start", "./database"],
+    "typeRoots": ["_types", "./node_modules/@types"],
+    "target": "ES2024",
+    "module": "ESNext",
+    "lib": ["ES2024"],
+    "rootDir": "./",
+    "outDir": "./build",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "useDefineForClassFields": false,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "application",
+    "bin",
+    "config",
+    "start",
+    "database",
+    "_types",
+    "test"
+  ],
+  "exclude": ["node_modules", "build"]
+}

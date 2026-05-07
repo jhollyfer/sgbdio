@@ -1,0 +1,31 @@
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Instalar curl para healthcheck
+RUN apk add --no-cache curl su-exec
+
+# Copiar build pronto (vem do artifact)
+COPY build/ ./
+COPY node_modules/ ./node_modules/
+COPY package.json ./
+COPY templates/ ./templates/
+
+# Criar diretório storage
+RUN mkdir -p ./_storage
+
+# Copiar logos padrão
+COPY _storage/logo-large.webp _storage/logo-small.webp ./_storage/
+
+# Usuário não-root
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001 -G nodejs && \
+    chown -R nodejs:nodejs /app
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+EXPOSE 3000
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["node", "bin/server.js"]
